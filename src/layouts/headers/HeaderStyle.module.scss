@@ -1,0 +1,30 @@
+:root{
+  //--container-width: 100px;
+  --container-padding: 10vw;
+}
+
+.header_component {
+  width: 100vw;
+  height: 50px;
+  display: inline-flex;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .app_logo {
+    display: inline-flex;
+    align-items: center;
+    width: 25vw;
+    height: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: var(--container-padding);
+  }
+
+  .header_content {
+    display: inline-flex;
+    align-items: center;
+    width: 75vw;
+    height: 100%;
+    padding-right: var(--container-width);
+  }
+}

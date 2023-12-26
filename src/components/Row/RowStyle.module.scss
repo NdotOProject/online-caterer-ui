@@ -1,0 +1,21 @@
+.row_component {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
+
+  .row_item {
+    margin: 0 calc(var(--spacing) / 2);
+    display: inline-flex;
+    align-items: center;
+
+    &.first_item {
+      margin-left: 0;
+    }
+
+    &.last_item {
+      margin-right: 0;
+    }
+  }
+}

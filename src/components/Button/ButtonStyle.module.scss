@@ -1,0 +1,51 @@
+.button_component {
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.text {
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    &:before {
+      content: attr(title);
+      display: block;
+      font-weight: 600;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+  }
+
+  &.primary {
+    background-color: #f0f;
+  }
+
+  &.outline {
+
+  }
+
+  &.rounded {
+
+  }
+
+}

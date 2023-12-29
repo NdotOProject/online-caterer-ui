@@ -5,7 +5,7 @@ import styles from './RowStyle.module.scss';
 
 function Row(
     {
-        children = [],
+        children,
         spacing = "10px",
         style,
         className,

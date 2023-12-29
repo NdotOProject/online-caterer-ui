@@ -17,38 +17,41 @@
     position: absolute;
     top: 0;
     width: 100vw;
-    height: var(--header-height);
     overflow: hidden;
-  }
+    height: 50px;
+    display: inline-flex;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  .layout_footer {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: var(--footer-height);
+
+    .app_logo {
+      display: inline-flex;
+      align-items: center;
+      width: 25vw;
+      height: 100%;
+      font-size: 20px;
+      font-weight: 600;
+      padding-left: var(--container-padding);
+    }
+
+    .header_content {
+      display: inline-flex;
+      align-items: center;
+      width: 75vw;
+      height: 100%;
+      padding-right: var(--container-width);
+    }
   }
 
   .layout_left_bar {
-    width: fit-content;
+    width: 20vw;
     max-height: calc(100vh - var(--header-height));
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
     position: relative;
     left: 0;
     top: 50px;
 
-    background-color: red;
-  }
-
-  .layout_right_bar {
-    width: var(--right-bar-width);
-    max-height: calc(100vh - var(--header-height));
-    min-height: calc(100vh - var(--header-height) - var(--footer-height));
-    position: absolute;
-    top: var(--header-height);
-    bottom: var(--footer-height);
-    right: 0;
-
-    background-color: green;
+    background-color: #fff;
   }
 
   .layout_body {

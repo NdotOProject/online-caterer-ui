@@ -45,11 +45,7 @@ export default function Layout({children}) {
     );
 
     return (
-        <LayoutComponent
-            headerConfig={new HeaderConfig(appLogo, headerContent)}
-            footer={<Footer/>}
-            leftBar={<SideBar/>}
-        >
+        <LayoutComponent>
             {children}
         </LayoutComponent>
     );

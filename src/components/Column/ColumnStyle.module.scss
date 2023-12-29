@@ -6,6 +6,8 @@
 
   .column_item {
     margin: calc(var(--spacing) / 2) 0;
+    display: inline-flex;
+    justify-content: center;
 
     &.first_item {
       margin-top: 0;

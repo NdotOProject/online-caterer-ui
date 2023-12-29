@@ -1,11 +1,18 @@
+import clsx from "clsx";
+
 import Row from "../../components/Row";
 import Column from "../../components/Column";
 
+import styles from "./FooterStyle.module.scss";
+
 function Footer() {
+
+    const footerClass = clsx(styles.footer_component, {});
+
     return (
-        <Column>
-            <Row>
-                <div className="col-md-6 contact-section">
+        <Column className={footerClass}>
+            <Row spacing={"20px"}>
+                <div className={styles.contact_section}>
                     <h3>Contact Us</h3>
                     <p>19 Lê Thanh Nghị, Bạch Mai, Hai Bà Trưng, Hà Nội</p>
                     <p>Email: info@onlinecaterer.com</p>

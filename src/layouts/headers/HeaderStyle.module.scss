@@ -11,20 +11,52 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .app_logo {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    width: 25vw;
     height: 100%;
-    font-size: 20px;
-    font-weight: 600;
     padding-left: var(--container-padding);
+
+    .logo_child {
+      font-size: 20px;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &.mobile {
+      width: 100vw;
+      justify-content: center;
+    }
+
+    &.tablet {
+      width: 50vw;
+    }
+
+    &.computer {
+      width: 25vw;
+    }
   }
 
   .header_content {
     display: inline-flex;
     align-items: center;
-    width: 75vw;
     height: 100%;
     padding-right: var(--container-width);
+
+    &.tablet {
+      width: 50%;
+    }
+
+    &.computer {
+      width: 25%;
+    }
   }
+
+  .right_content {
+    display: inline-flex;
+    align-items: center;
+  }
+
 }

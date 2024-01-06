@@ -1,11 +1,10 @@
 import {memo} from 'react';
 
+const Image = memo((
+	{
+		src
+	}) => {
 
-function Image(
-    {
-        src
-    }) {
+});
 
-}
-
-export default memo(Image);
+export default Image;

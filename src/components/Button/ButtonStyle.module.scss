@@ -1,51 +1,69 @@
-.button_component {
-  display: inline-block;
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: fit-content;
   height: fit-content;
-  padding: 10px;
+  padding: 0;
+  margin: 0;
   border-radius: 5px;
   border: 1px solid transparent;
-  font-weight: 500;
   text-decoration: none;
-  background-color: #fff;
-  color: #000;
+  font-weight: 500;
   cursor: pointer;
   user-select: none;
 
-  &.disabled {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  &.text {
+  &_text {
     border: none;
+    color: var(--Button_Text-text);
     background-color: transparent;
+
+    &:before {
+      content: attr(content);
+      display: block;
+      height: 0;
+      font-weight: 600;
+      overflow: hidden;
+      visibility: hidden;
+    }
 
     &:hover {
       font-weight: 600;
       text-decoration: underline;
     }
+  }
 
-    &:before {
-      content: attr(title);
-      display: block;
-      font-weight: 600;
-      height: 0;
-      overflow: hidden;
-      visibility: hidden;
+  &_primary {
+    color: var(--Button_Primary-text);
+    border-color: var(--Button_Primary-border);
+    background-color: var(--Button_Primary-bg);
+
+    &:hover {
+      border-color: var(--Button_Primary-border--hover);
+      background-color: var(--Button_Primary-bg--hover);
     }
   }
 
-  &.primary {
-    background-color: #f0f;
+  &_outline {
+    color: var(--Button_Outline-text);
+    border-color: var(--Button_Outline-border);
+    background-color: var(--Button_Outline-bg);
+
+    &:hover {
+      color: var(--Button_Outline-text--hover);
+      border-color: var(--Button_Outline-border--hover);
+      background-color: var(--Button_Outline-bg--hover);
+    }
   }
 
-  &.outline {
-
+  &--rounded {
+    border-radius: 999px;
+    box-shadow: 0 2px 8px var(--Button_Rounded-shadow);
   }
 
-  &.rounded {
-
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
-
 }

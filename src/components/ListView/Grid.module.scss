@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: var(--row-width);
+  height: var(--row-height);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: var(--col-width);
+  height: var(--col-height);
+}
+
+.item {
+  width: var(--item-width);
+  height: var(--item-height);
+}

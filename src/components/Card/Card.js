@@ -1,14 +1,19 @@
-import clsx from "clsx";
 import {memo} from "react";
+import clsx from "clsx";
 
-import styles from "./CardStyle.module.scss";
+import classes from "./CardStyle.module.scss";
 
-function Card({children}) {
-    return (
-        <div className={clsx(styles.card_component)}>
-            {children}
-        </div>
-    );
-}
+const Card = memo(({className, style, children, ...props}) => (
+	<div
+		className={clsx({
+			[classes.card]: true,
+			[className]: className
+		})}
+		style={style}
+		{...props}
+	>
+		{children}
+	</div>
+));
 
-export default memo(Card);
+export default Card;

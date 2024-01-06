@@ -1,1 +1,1 @@
-export {default} from "./Icons";
+export {AngleLeft, AngleRight} from "./Icons";

@@ -7,27 +7,27 @@
   border: none;
 
   .input_label {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 13px;
     position: absolute;
     left: 8px;
     top: 8px;
+    font-size: 13px;
+    color: var(--text_input-label-color);
     pointer-events: none;
     user-select: none;
     transition: all 0.2s linear;
 
     &.label_top {
-      color: #000;
       top: -5px;
       left: 5px;
       font-size: 10px;
-      background-color: #fff;
+      color: var(--text_input-focus-color);
+      background-color: var(--background-color);
       padding: 0 2.5px;
     }
   }
 
   input[type = "text"]:focus {
-    border: 2px solid #000;
+    border: 2px solid var(--text_input-focus-color);
   }
 
   input[type = "text"]:focus-visible {
@@ -38,16 +38,16 @@
     width: 180px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid var(--black);
     padding: 5px;
     outline-offset: 1px;
   }
 
   .error_text {
-    font-size: 10px;
     position: relative;
     left: 5px;
     top: 2px;
-    color: red;
+    font-size: 10px;
+    color: var(--text_input-error-color);
   }
 }

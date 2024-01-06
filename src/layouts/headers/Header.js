@@ -1,75 +1,64 @@
 import {memo} from "react";
-
-import styles from "./HeaderStyle.module.scss";
-import Row from "../../components/Row/Row";
-import Button from "../../components/Button";
-import TextInput, {TextInputValidator} from "../../components/TextInput";
+import PropTypes from "prop-types";
 import clsx from "clsx";
+
+import Button, {ButtonLink} from "../../components/Button";
+import Card from "../../components/Card";
+import {Item, Row} from "../../components/ListView";
 import WindowType from "../WindowType";
 
-function Header(
-    {}) {
+import classes from "./HeaderStyle.module.scss";
 
-    const headerClass = clsx(styles.header_component, {});
+const Header = memo(
+	({windowType, middle, right}) => {
 
-    const centerContentClass = clsx({});
+		return (
+			<Card>
+				<Row
+					className={clsx({
+						[classes.header]: true,
+					})}
+				>
+					<Item
+						key={"header_app_logo"}
+						flex={1}
+						className={clsx({
+							[classes.header__logo_container]: true,
+							[classes.mobile]: windowType.isMobile()
+						})}
+					>
+						<Button
+							link={ButtonLink.external("/")}
+							className={clsx({
+								[classes.logo_text]: true
+							})}
+							content={"Online Catering"}
+						/>
+					</Item>
 
-    const rightContentClass = clsx(styles.right_content, {});
+					<Item
+						visible={windowType?.isComputer()}
+						flex={2}
+					>
+						{middle}
+					</Item>
 
-    const windowType = WindowType.getType();
+					<Item
+						visible={(
+							windowType?.isComputer()
+							|| windowType?.isTablet()
+						)}
+						flex={1}>
+						{right}
+					</Item>
+				</Row>
+			</Card>
+		);
+	}
+);
 
-    const logoClass = clsx(styles.app_logo, styles[windowType.type], {});
+Header.propTypes = {
+	windowType: PropTypes.instanceOf(WindowType).isRequired,
+};
 
-    return (
-        <Row
-            spacing={"50px"}
-            className={headerClass}
-        >
-            <div className={logoClass}>
-                <Button className={styles.logo_child} externalLink={"/"}>
-                    Online Catering
-                </Button>
-            </div>
-
-            {windowType.isComputer() &&
-                <Row className={centerContentClass} spacing={"15px"}>
-                    <Button externalLink={"#"} title={"Home"}>
-                        <span>Home</span>
-                    </Button>
-
-                    <Button externalLink={"#"} title={"Menu"}>
-                        <span>Menu</span>
-                    </Button>
-
-                    <Button externalLink={"#"} title={"Service"}>
-                        <span>Service</span>
-                    </Button>
-
-                    <Button externalLink={"#"} title={"Contact"}>
-                        <span>Contact</span>
-                    </Button>
-
-                </Row>}
-
-            {!windowType.isMobile() &&
-                <Row className={rightContentClass}>
-                    <TextInput
-                        label={"Search"}
-                        validators={[TextInputValidator.NOT_EMPTY()]}
-                        showError={false}
-                    />
-
-                    <Button title={"Sign In"}/>
-                </Row>}
-        </Row>
-    );
-}
-
-export class HeaderConfig {
-    constructor(logo, content) {
-        this.logo = logo;
-        this.content = content;
-    }
-}
-
-export default memo(Header);
+export default Header;

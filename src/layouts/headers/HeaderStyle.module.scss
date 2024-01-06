@@ -1,22 +1,24 @@
-:root{
+:root {
   //--container-width: 100px;
-  --container-padding: 10vw;
+  //--container-padding: 10vw;
 }
 
-.header_component {
+.header {
   width: 100vw;
   height: 50px;
-  display: inline-flex;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  .app_logo {
+  //background-color: var(--white);
+  //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &__logo_container {
     display: flex;
     align-items: center;
-    height: 100%;
-    padding-left: var(--container-padding);
+    justify-content: center;
 
-    .logo_child {
+    &.mobile {
+      width: 100%;
+    }
+
+    .logo_text {
+      text-decoration: none;
       font-size: 20px;
       font-weight: 600;
 
@@ -24,39 +26,27 @@
         text-decoration: none;
       }
     }
-
-    &.mobile {
-      width: 100vw;
-      justify-content: center;
-    }
-
-    &.tablet {
-      width: 50vw;
-    }
-
-    &.computer {
-      width: 25vw;
-    }
   }
 
-  .header_content {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    padding-right: var(--container-width);
-
-    &.tablet {
-      width: 50%;
-    }
-
-    &.computer {
-      width: 25%;
-    }
-  }
-
-  .right_content {
-    display: inline-flex;
-    align-items: center;
-  }
+  //
+  //.header_content {
+  //  display: inline-flex;
+  //  align-items: center;
+  //  height: 100%;
+  //  padding-right: var(--container-width);
+  //
+  //  &.tablet {
+  //    width: 50%;
+  //  }
+  //
+  //  &.computer {
+  //    width: 25%;
+  //  }
+  //}
+  //
+  //.right_content {
+  //  display: inline-flex;
+  //  align-items: center;
+  //}
 
 }

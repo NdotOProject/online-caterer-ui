@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 
 import styles from "./SideBar.module.scss";
 import Card from "../../components/Card";
-import Column from "../../components/Column";
+import {Column} from "../../components/ListView";
 
 function SideBarItem(
     {

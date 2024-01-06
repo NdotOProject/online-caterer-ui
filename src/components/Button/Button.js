@@ -1,71 +1,68 @@
+import {memo} from "react";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 import clsx from "clsx";
 
-import {Link} from "react-router-dom";
+import ButtonLink from "./ButtonLink";
+import ButtonType from "./ButtonType";
 
-import styles from "./ButtonStyle.module.scss";
+import classes from "./ButtonStyle.module.scss";
 
-export default function Button(
-    {
-        type = ButtonType.TEXT,
-        disabled = false,
-        internalLink,
-        externalLink,
-        children,
-        className,
-        title,
-        onClick,
-        ...props
-    }) {
-    const componentProps = {title, onClick, ...props};
+const Button = memo(
+	({
+		 type = ButtonType.TEXT,
+		 link,
+		 rounded = false,
+		 disabled = false,
+		 content, children,
+		 className, style,
+		 onClick,
+		 ...props
+	 }) => {
 
-    if (disabled) {
-        Object.keys(componentProps).forEach(key => {
-            if (typeof componentProps[key] === "function"
-                && key.startsWith("on")) {
-                delete componentProps[key];
-            }
-        });
-    }
+		const buttonProps = {content, onClick, style, ...props};
 
-    let Component;
-    if (internalLink) {
-        Component = Link;
-        componentProps.to = internalLink;
-    } else if (externalLink) {
-        Component = "a";
-        componentProps.href = externalLink;
-    } else {
-        Component = "button";
-    }
+		if (disabled) {
+			Object.keys(buttonProps).forEach((key) => {
+				if (typeof buttonProps[key] === "function"
+					&& key.startsWith("on")) {
+					delete buttonProps[key];
+				}
+			});
+		}
 
-    const componentClass = clsx(styles.button_component, {
-        [styles[ButtonType.PRIMARY.value]]: type === ButtonType.PRIMARY,
-        [styles[ButtonType.OUTLINE.value]]: type === ButtonType.OUTLINE,
-        [styles[ButtonType.TEXT.value]]: type === ButtonType.TEXT,
-        [styles[ButtonType.ROUNDED.value]]: type === ButtonType.ROUNDED,
-        [styles.disabled]: disabled,
-        [className]: className,
-    });
+		let Wrapper;
+		if (link && link.isInternalLink()) {
+			Wrapper = Link;
+			buttonProps.to = link.value;
+		} else if (link && link.isExternalLink()) {
+			Wrapper = "a";
+			buttonProps.href = link.value;
+		} else {
+			Wrapper = "button";
+		}
 
-    if (children === undefined) {
-        children = title;
-    }
+		return (
+			<Wrapper
+				className={clsx({
+					[classes.button]: true,
+					[classes[`button_${type.value}`]]: true,
+					[classes["button--disabled"]]: disabled,
+					[classes["button--rounded"]]: rounded,
+					[className]: className
+				})}
+				{...buttonProps}
+			>
+				{children ?? content}
+			</Wrapper>
+		);
+	}
+);
 
-    return (
-        <Component className={componentClass} {...componentProps}>
-            {children}
-        </Component>
-    );
-}
+Button.propTypes = {
+	type: PropTypes.instanceOf(ButtonType),
+	link: PropTypes.instanceOf(ButtonLink),
+	content: PropTypes.string,
+};
 
-export class ButtonType {
-
-    constructor(value) {
-        this.value = value;
-    }
-
-    static PRIMARY = new ButtonType("primary");
-    static OUTLINE = new ButtonType("outline");
-    static TEXT = new ButtonType("text");
-    static ROUNDED = new ButtonType("rounded");
-}
+export default Button;

@@ -1,0 +1,19 @@
+.customer_layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+
+  .header_nav_content {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .nav_item {
+      height: 100%;
+    }
+  }
+}

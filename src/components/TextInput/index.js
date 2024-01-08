@@ -1,1 +1,2 @@
-export {default, TextInputType, TextInputValidator} from "./TextInput";
+export {default, TextInputType} from "./TextInput";
+export {InputValidator} from "./InputValidator";

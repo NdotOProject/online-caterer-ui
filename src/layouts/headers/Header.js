@@ -10,21 +10,21 @@ import WindowType from "../WindowType";
 import classes from "./HeaderStyle.module.scss";
 
 const Header = memo(
-	({windowType, middle, right}) => {
+	({windowType, middle, right, className}) => {
 
 		return (
-			<Card>
-				<Row
-					className={clsx({
-						[classes.header]: true,
-					})}
-				>
+			<Card
+				className={clsx({
+					[classes.header]: true,
+					[className]: className,
+				})}
+			>
+				<Row>
 					<Item
-						key={"header_app_logo"}
 						flex={1}
 						className={clsx({
-							[classes.header__logo_container]: true,
-							[classes.mobile]: windowType.isMobile()
+							[classes.logo_container]: true,
+							[classes.mobile]: windowType.isMobile
 						})}
 					>
 						<Button
@@ -37,18 +37,19 @@ const Header = memo(
 					</Item>
 
 					<Item
-						visible={windowType?.isComputer()}
 						flex={2}
+						visible={windowType.isComputer}
 					>
 						{middle}
 					</Item>
 
 					<Item
-						visible={(
-							windowType?.isComputer()
-							|| windowType?.isTablet()
-						)}
-						flex={1}>
+						flex={1}
+						visible={
+							windowType.isComputer
+							|| windowType.isTablet
+						}
+					>
 						{right}
 					</Item>
 				</Row>

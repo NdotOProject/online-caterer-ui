@@ -3,45 +3,6 @@ import clsx from "clsx";
 
 import classes from "./TextInputStyle.module.scss";
 
-export class TextInputValidator {
-	constructor(message, callback) {
-		this.message = message;
-		this.callback = callback;
-	}
-
-	validate(currentValue, prevValue) {
-		let testResult;
-		if (currentValue === undefined || currentValue === null) {
-			testResult = false;
-		} else {
-			testResult = this.callback(currentValue, prevValue);
-		}
-		return {
-			isValid: testResult,
-			message: testResult ? undefined : this.message,
-		};
-	}
-
-	static notEmpty = (message) => {
-		return new TextInputValidator(message,
-			(currentValue, prevValue) => {
-				if (currentValue === "" && prevValue !== "") {
-					return true;
-				}
-				return currentValue.trim() !== "";
-			}
-		);
-	};
-
-	static numberOnly = (message) => {
-		new TextInputValidator(message,
-			(currentValue, prevValue) => {
-
-			}
-		);
-	}
-}
-
 export class TextInputType {
 	constructor(value) {
 		this.value = value;
@@ -79,32 +40,13 @@ export default function TextInput(
 	const [inputValue, setInputValue] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [labelTop, setLabelTop] = useState(false);
-
-	const textInputClasses = clsx(classes.text_input_component, {
-		[className]: className
-	});
-
-	let labelClasses = {
-		[classes.input_label]: true,
-		[labelClassName]: labelClassName,
-		[classes.label_top]: labelTop
-	};
+	const [isInputActive, setIsInputActive] = useState(false);
 
 	const inputProps = {
 		id, pattern, placeholder,
 		disabled, readOnly,
 		...props
 	};
-
-	const inputClasses = clsx({
-		[classes.form_input]: true,
-		[inputClassName]: inputClassName
-	});
-
-	const errorMessageClasses = clsx({
-		[classes.error_text]: true,
-		[messageClassName]: messageClassName
-	});
 
 	const validateValue = (e) => {
 		const currentValue = e.target.value;
@@ -131,36 +73,63 @@ export default function TextInput(
 		validateValue(e);
 		if (inputValue.length <= 0) {
 			setLabelTop(false);
+			setIsInputActive(false);
 		}
 	}
 
 	const handleFocus = () => {
+		setIsInputActive(true);
 		setLabelTop(true);
 	}
 
 	return (
-		<div className={textInputClasses}>
-			{label &&
-				<label
-					htmlFor={id}
-					className={clsx(labelClasses)}
-				>
-					{label}
-				</label>
-			}
+		<div
+			className={clsx({
+				[classes.text_input]: true,
+				[className]: className
+			})}
+		>
+			<div
+				className={clsx({
+					[classes.input_container]: true,
+				})}
+			>
+				{label &&
+					<label
+						htmlFor={id}
+						className={clsx({
+							[classes.input_label]: true,
+							[labelClassName]: labelClassName,
+							[classes.label_top]: labelTop
+						})}
+					>
+						{label}
+					</label>
+				}
 
-			<input
-				type={type.value}
-				className={inputClasses}
-				value={inputValue}
-				onBlur={handleOnBlur}
-				onFocus={handleFocus}
-				onChange={handleOnChange}
-				{...inputProps}
-			/>
+				<input
+					type={type.value}
+					className={clsx({
+						[classes.form_input]: true,
+						[classes.active]: isInputActive,
+						[inputClassName]: inputClassName
+					})}
+					placeholder={"Search"}
+					value={inputValue}
+					onBlur={handleOnBlur}
+					onFocus={handleFocus}
+					onChange={handleOnChange}
+					{...inputProps}
+				/>
+			</div>
 
 			{showError &&
-				<span className={errorMessageClasses}>
+				<span
+					className={clsx({
+						[classes.error_text]: true,
+						[messageClassName]: messageClassName
+					})}
+				>
                     {errorMessage}
                 </span>
 			}

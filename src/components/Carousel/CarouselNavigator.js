@@ -19,8 +19,8 @@ export default class CarouselNavigator {
 	constructor(
 		{
 			length = 5,
-			position = NavigatorPosition.BOTTOM,
 			visible = true,
+			position = NavigatorPosition.BOTTOM,
 			style = NavigatorStyle.CONTENT(),
 		}) {
 		this.#key = ComponentKeyProvider.getKey(
@@ -37,6 +37,33 @@ export default class CarouselNavigator {
 		const result = new CarouselNavigator({});
 		result.#isNone = true;
 		return result;
+	}
+
+	static dot(
+		{
+			size = 25,
+			color = {
+				active: "",
+				basic: ""
+			},
+		}) {
+		return new CarouselNavigator({});
+	}
+
+	static dash(
+		{
+			width = 50,
+			height = 10,
+			color = {
+				active: "",
+				basic: ""
+			},
+		}) {
+		return new CarouselNavigator({});
+	}
+
+	static content(newContent) {
+		return new CarouselNavigator({});
 	}
 
 	get position() {
@@ -77,6 +104,7 @@ export default class CarouselNavigator {
 				className={clsx({
 					[classes.carousel__navigator]: true,
 					[classes["carousel__navigator--inner"]]: this.#style.isInner,
+					[classes[this.position.position]]: this.#style.isInner
 				})}
 			>
 				<Wrapper

@@ -1,4 +1,4 @@
-.text_input_component {
+.text_input {
   display: inline-flex;
   flex-direction: column;
   position: relative;
@@ -6,41 +6,49 @@
   height: fit-content;
   border: none;
 
-  .input_label {
+  .input_container {
     position: absolute;
-    left: 8px;
-    top: 8px;
-    font-size: 13px;
-    color: var(--text_input-label-color);
-    pointer-events: none;
-    user-select: none;
-    transition: all 0.2s linear;
+    width: 100%;
+    height: 100%;
 
-    &.label_top {
-      top: -5px;
+    .input_label {
+      position: absolute;
       left: 5px;
-      font-size: 10px;
-      color: var(--text_input-focus-color);
-      background-color: var(--background-color);
-      padding: 0 2.5px;
+      top: 8px;
+      font-size: 13.5px;
+      color: var(--TextInput-label);
+      //background-color: var(--TextInput-focus-label-bg);
+      pointer-events: none;
+      user-select: none;
+      transition: all 0.2s linear;
+
+      border: 1px solid red;
+
+      &.label_top {
+        top: -5px;
+        left: 5px;
+        font-size: 10px;
+        color: var(--TextInput-focus);
+        padding: 0 2.5px;
+      }
     }
   }
 
-  input[type = "text"]:focus {
-    border: 2px solid var(--text_input-focus-color);
-  }
-
-  input[type = "text"]:focus-visible {
-    outline: none;
-  }
-
   .form_input {
-    width: 180px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     border: 1px solid var(--black);
     padding: 5px;
     outline-offset: 1px;
+
+    &.active {
+      border: 2px solid var(--TextInput-focus);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   .error_text {
@@ -48,6 +56,6 @@
     left: 5px;
     top: 2px;
     font-size: 10px;
-    color: var(--text_input-error-color);
+    color: var(--TextInput-error);
   }
 }

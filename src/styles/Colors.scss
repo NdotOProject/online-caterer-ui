@@ -30,8 +30,9 @@
   --Card-shadow: rgb(0 0 0 / 12%);
 
   // TextInput
-  --text_input-label-color: rgba(0, 0, 0, 0.5);
-  --text_input-focus-color: rgba(255, 190, 51, 1);
-  --text_input-error-color: rgba(255, 0, 0, 1);
+  --TextInput-label: rgba(0, 0, 0, 0.6);
+  --TextInput-error: rgb(255, 0, 0);
+  --TextInput-focus: var(--primary-color);
+  --TextInput-focus-label-bg: var(--white);
 
 }

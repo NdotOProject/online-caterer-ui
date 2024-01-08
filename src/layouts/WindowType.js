@@ -9,11 +9,17 @@ export default class WindowType {
 		this.type = type;
 	}
 
-	isMobile = () => this.type === "mobile";
+	get isMobile() {
+		return this.type === "mobile";
+	}
 
-	isTablet = () => this.type === "tablet";
+	get isTablet() {
+		return this.type === "tablet";
+	}
 
-	isComputer = () => this.type === "computer";
+	get isComputer() {
+		return this.type === "computer";
+	}
 
 	static newInstance = () => {
 		const width = window.innerWidth;

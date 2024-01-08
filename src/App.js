@@ -7,6 +7,9 @@ import Carousel, {
 	NavigatorPosition,
 	NavigatorStyle
 } from "./components/Carousel";
+import Form, {FormInput, InputLabel} from "./components/Form";
+import InputError from "./components/Form/InputError";
+import {InputValidator} from "./components/TextInput";
 
 function App() {
 
@@ -19,9 +22,8 @@ function App() {
 					visible: true,
 					position: NavigatorPosition.BOTTOM,
 					length: 5,
-					style: NavigatorStyle.DOT(true),
+					style: NavigatorStyle.CONTENT(),
 				})}
-				// navigator={CarouselNavigator.none()}
 				nextButton={CarouselButton.next({
 					alwaysShowIcon: true
 				})}
@@ -65,6 +67,20 @@ function App() {
 				{/*	Page 7*/}
 				{/*</div>*/}
 			</Carousel>
+
+			<Form
+				initial={{
+					search: "hello world"
+				}}
+			>
+				{FormInput.text({
+					label: InputLabel.asPlaceholder("Search", ""),
+					error: new InputError({className: ""}),
+					htmlId: "searchInput",
+					id: "search",
+					validators: [InputValidator.notEmpty("Search is empty")]
+				})}
+			</Form>
 		</Layout>
 	);
 }

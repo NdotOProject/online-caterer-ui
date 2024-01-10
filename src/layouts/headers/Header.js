@@ -28,7 +28,7 @@ const Header = memo(
 						})}
 					>
 						<Button
-							link={ButtonLink.external("/")}
+							link={ButtonLink.internal("/")}
 							className={clsx({
 								[classes.logo_text]: true
 							})}

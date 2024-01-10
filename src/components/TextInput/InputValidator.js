@@ -1,36 +1,48 @@
 export class InputValidator {
+	#message;
+	#callback;
+
 	constructor(message, callback) {
-		this.message = message;
-		this.callback = callback;
+		this.#message = message;
+		this.#callback = callback;
 	}
 
-	validate(currentValue, prevValue) {
+	validate(newValue, oldValue) {
 		let testResult;
-		if (currentValue === undefined || currentValue === null) {
+		if (newValue === undefined || newValue === null) {
 			testResult = false;
 		} else {
-			testResult = this.callback(currentValue, prevValue);
+			testResult = this.#callback(newValue, oldValue);
 		}
 		return {
 			isValid: testResult,
-			message: testResult ? undefined : this.message,
+			message: testResult ? undefined : this.#message,
 		};
 	}
 
-	static notEmpty = (message) => {
+	static notEmpty(message) {
 		return new InputValidator(message,
-			(currentValue, prevValue) => {
-				if (currentValue === "" && prevValue !== "") {
+			(newValue, oldValue) => {
+				if (newValue === "" && oldValue !== "") {
 					return true;
 				}
-				return currentValue.trim() !== "";
+				return newValue.trim() !== "";
 			}
 		);
 	};
 
-	static numberOnly = (message) => {
-		new InputValidator(message,
-			(currentValue, prevValue) => {
+	static emailFormat(message) {
+		return new InputValidator(message,
+			(newValue, oldValue) => {
+				const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				return regex.test(newValue);
+			}
+		);
+	}
+
+	static numberOnly(message) {
+		return new InputValidator(message,
+			(newValue, oldValue) => {
 
 			}
 		);

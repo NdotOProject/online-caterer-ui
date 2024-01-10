@@ -1,16 +1,16 @@
 import {clsx} from "clsx";
 
+const CssClasses = {
+	label: "form_label",
+	inner: "inner",
+	outer: "outer",
+	placeholder: "placeholder",
+	active: "active",
+};
+
 export default class InputLabel {
 	static #TYPE_INNER = "inner";
 	static #TYPE_OUTER = "outer";
-
-	static #CSS_CLASSES = {
-		inputLabel: "",
-		inner: "",
-		outer: "",
-		placeholder: "",
-		active: "",
-	};
 
 	#type;
 	#content;
@@ -18,10 +18,10 @@ export default class InputLabel {
 	#className;
 
 	constructor(type, content, position, className) {
-		this.type = type;
-		this.content = content;
-		this.position = position;
-		this.className = className;
+		this.#type = type;
+		this.#content = content;
+		this.#position = position;
+		this.#className = className;
 	}
 
 	getComponent({id, isActive}) {
@@ -32,12 +32,14 @@ export default class InputLabel {
 			<label
 				htmlFor={id}
 				className={clsx({
-					[InputLabel.#CSS_CLASSES.inputLabel]: true,
-					[InputLabel.#CSS_CLASSES.inner]: isInner,
-					[InputLabel.#CSS_CLASSES.outer]: isOuter,
-					[this.#position?.className]: (isOuter || isInner) && !isPlaceholder,
-					[InputLabel.#CSS_CLASSES.placeholder]: isPlaceholder,
-					[InputLabel.#CSS_CLASSES.active]: isActive,
+					[CssClasses.label]: true,
+					[CssClasses.inner]: isInner,
+					[CssClasses.outer]: isOuter,
+					[this.#position?.className]: (
+						(isOuter || isInner) && !isPlaceholder
+					),
+					[CssClasses.placeholder]: isPlaceholder,
+					[CssClasses.active]: isActive,
 					[this.#className]: this.#className,
 				})}
 			>

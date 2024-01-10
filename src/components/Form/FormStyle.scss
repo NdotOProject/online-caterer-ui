@@ -1,0 +1,84 @@
+.form_container {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+
+  .input_container {
+    --input-border-width: 1px;
+    --input-padding: 5px;
+
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    .form_input {
+      width: 100%;
+      height: 100%;
+      padding: var(--input-padding);
+      border: var(--input-border-width) solid var(--black);
+      border-radius: 5px;
+      outline-offset: 1px;
+
+      &.active {
+        border: 2px solid var(--TextInput-focus);
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .form_label {
+      width: fit-content;
+      height: fit-content;
+      /*
+            &.inner {
+              &.active {
+
+              }
+            }
+
+            &.outer {
+              &.active {
+
+              }
+            }
+      */
+      &.placeholder {
+        position: absolute;
+        top: 50%;
+        left: calc(var(--input-border-width) + var(--input-padding));
+        transform: translate(0, -50%);
+        font-size: 13.25px;
+        color: var(--TextInput-label);
+        border-radius: 5px;
+        background-color: var(--TextInput-focus-label-bg);
+        pointer-events: none;
+        user-select: none;
+        transition: all 0.25s linear;
+
+        &.active {
+          top: 0;
+          font-size: 10px;
+          color: var(--TextInput-focus);
+          padding: 0 2px;
+        }
+
+        & ~ .form_input::placeholder {
+          width: 0;
+          height: 0;
+        }
+      }
+    }
+
+    .error_message {
+      margin-left: calc(var(--input-border-width) + var(--input-padding));
+      font-size: 10px;
+      color: var(--TextInput-error);
+    }
+  }
+}
+
+// trick center
+//inset: 0;
+//margin: auto 0 auto calc(var(--input-border-width) + var(--input-padding));

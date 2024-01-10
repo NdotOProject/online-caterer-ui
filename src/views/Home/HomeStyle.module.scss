@@ -1,0 +1,15 @@
+.food_carousel {
+  width: 100%;
+}
+
+.food_list {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 10px 0;
+}

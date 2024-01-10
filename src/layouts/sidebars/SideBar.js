@@ -1,81 +1,118 @@
-import {memo} from "react";
+import {memo, useEffect, useState} from "react";
 import clsx from "clsx";
 
-import Button from "../../components/Button";
 import Card from "../../components/Card";
-import {Column, Item} from "../../components/ListView";
+import Form, {FormInput, InputLabel} from "../../components/Form";
+import Button, {ButtonLink, ButtonType} from "../../components/Button";
+import {Column, Item, Row} from "../../components/ListView";
+import {DropdownItem} from "../../components/Form/FormInput";
+import {instance} from "../../services/HttpClient";
 
 import classes from "./SideBar.module.scss";
-import TextInput, {InputValidator} from "../../components/TextInput";
-
-function SideBarItem(
-	{
-		className,
-		title,
-		internalLink,
-		externalLink,
-		...props
-	}) {
-
-
-	const componentProps = {
-		...props
-	};
-
-	return (
-		<Card>
-			<Button className={clsx({
-				[classes.side_bar]: true,
-				[className]: className,
-			})} {...componentProps}>
-				{title}
-			</Button>
-		</Card>
-	);
-}
 
 function SideBar(
 	{
 		className,
-		itemModels = [
-			{
-				title: "Item 1",
-				externalLink: ""
-			},
-			{
-				title: "Item 2",
-				externalLink: ""
-			}
-		],
-	}) {
+		includeItems = [],
+		publicValue,
+		setPublicValue = ({}) => {
+		}
+	}
+) {
+	const [categoryList, setCategoryList] = useState([]);
+	const [eventList, setEventList] = useState([]);
 
-	const componentClass = clsx(classes.side_bar, {
-		[className]: className,
-	});
+	useEffect(() => {
+		instance.get("Event")
+		.then((res) => {
+			setEventList(res.data.Payload);
+		}).catch((e) => {
+			console.log(e);
+		})
+
+		instance.get("FoodCategory")
+		.then((res) => {
+			setCategoryList(res.data.Payload);
+		}).catch(e => {
+			console.log(e);
+		})
+	}, []);
 
 	return (
 		<Card>
 			<Column
-				className={componentClass}
-				spacing={"5px"}
+				className={clsx(classes.side_bar, {
+					[className]: className,
+				})}
 			>
 				<Item
+					key={"SearchForm"}
 					className={clsx({
 						[classes.side_bar_item]: true,
 					})}
 				>
-					<TextInput
-						label={"Search"}
-						placeholder={"Search"}
+					<Form
 						className={clsx({
-							[classes.search_input]: true,
+							[classes.form_search]: true,
 						})}
-						validators={[
-							InputValidator.notEmpty()
-						]}
-						showError={false}
-					/>
+						submitButtonType={ButtonType.PRIMARY}
+						submitButtonClassName={clsx({
+							[classes.search_btn]: true,
+						})}
+						submitButtonContent={"Find"}
+						onSubmit={(event, object) => {
+							setPublicValue({
+								...publicValue,
+								search: object,
+							});
+						}}
+					>
+						{FormInput.text({
+							id: "search",
+							htmlId: "searchInput",
+							label: InputLabel.asPlaceholder("Search", ""),
+							placeholder: "Search",
+							className: clsx({
+								[classes.search_input]: true,
+							}),
+						})}
+
+						{FormInput.dropdown({
+							id: "eventId",
+							className: clsx({
+								[classes.event_list]: true,
+							}),
+							items: eventList.map((event) => {
+								return (
+									<DropdownItem
+										key={event?.Id}
+										value={event?.Id}
+									>
+										{event?.Name}
+									</DropdownItem>
+								);
+							}),
+						})}
+
+						{FormInput.dropdown({
+							id: "categoryId",
+							className: clsx({
+								[classes.event_list]: true,
+							}),
+							items: categoryList.map((category) => {
+								return (
+									<DropdownItem
+										key={category?.Id}
+										value={category?.Id}
+									>
+										{category?.Name}
+									</DropdownItem>
+								);
+							}),
+						})}
+					</Form>
 				</Item>
+				{includeItems}
 			</Column>
 		</Card>
 	);

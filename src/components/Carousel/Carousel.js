@@ -19,10 +19,11 @@ import classes from "./CarouselStyle.module.scss";
 const Carousel = memo(
 		({
 			 width = 600, height = 400,
-			 navigator = new CarouselNavigator({}),
+			 navigator,
 			 nextButton = CarouselButton.next({alwaysShowIcon: false}),
 			 previousButton = CarouselButton.previous({alwaysShowIcon: false}),
-			 children
+			 className,
+			 children,
 		 }) => {
 
 			// fix children always is an array.
@@ -258,7 +259,7 @@ const Carousel = memo(
 			}, delay);
 
 			let ComponentWrapper;
-			switch (navigator.position) {
+			switch (navigator?.position) {
 				case NavigatorPosition.LEFT:
 				case NavigatorPosition.RIGHT:
 					ComponentWrapper = Row;
@@ -311,7 +312,7 @@ const Carousel = memo(
 				</Item>
 			);
 
-			const NavigatorSection = navigator.getNavigatorContent({
+			const NavigatorSection = navigator?.getNavigatorContent({
 				active: activeIndex,
 				children: children,
 				handleClick: (index) => {
@@ -327,7 +328,7 @@ const Carousel = memo(
 			});
 
 			let FirstSection, SecondSection;
-			switch (navigator.position) {
+			switch (navigator?.position) {
 				case NavigatorPosition.LEFT:
 				case NavigatorPosition.TOP:
 					FirstSection = NavigatorSection;
@@ -347,7 +348,8 @@ const Carousel = memo(
 					width={width}
 					height={height}
 					className={clsx({
-						[classes.carousel]: true
+						[classes.carousel]: true,
+						[className]: className,
 					})}
 				>
 					{FirstSection}

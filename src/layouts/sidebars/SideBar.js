@@ -3,8 +3,8 @@ import clsx from "clsx";
 
 import Card from "../../components/Card";
 import Form, {FormInput, InputLabel} from "../../components/Form";
-import Button, {ButtonLink, ButtonType} from "../../components/Button";
-import {Column, Item, Row} from "../../components/ListView";
+import {ButtonType} from "../../components/Button";
+import {Column, Item} from "../../components/ListView";
 import {DropdownItem} from "../../components/Form/FormInput";
 import {instance} from "../../services/HttpClient";
 
@@ -15,8 +15,7 @@ function SideBar(
 		className,
 		includeItems = [],
 		publicValue,
-		setPublicValue = ({}) => {
-		}
+		setPublicValue
 	}
 ) {
 	const [categoryList, setCategoryList] = useState([]);

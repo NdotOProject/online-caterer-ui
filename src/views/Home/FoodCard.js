@@ -52,7 +52,9 @@ export default function FoodCard(
 							[classes.food_name]: true,
 						})}
 					>
-						{name}
+						{name.length > 24
+							? name.substring(0, 21).concat("...")
+							: name}
 					</span>
 				<p>
 					{description?.length > 130

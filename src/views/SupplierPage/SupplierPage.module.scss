@@ -1,0 +1,11 @@
+.supplier_list {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+  width: 100%;
+  height: fit-content;
+  padding-bottom: 20px;
+  background-color: var(--background-color);
+}

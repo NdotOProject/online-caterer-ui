@@ -20,6 +20,7 @@ const CustomerLayout = memo(
 	({children, publicValue, setPublicValue}) => {
 
 		const [toggleLoginForm, setToggleLoginForm] = useState(false);
+		const [toggleSignUpForm, setToggleSignUpForm] = useState(false);
 
 		return (
 			<div
@@ -55,7 +56,7 @@ const CustomerLayout = memo(
 								})}
 							>
 								<Button
-									link={ButtonLink.internal("/")}
+									link={ButtonLink.internal("/suppliers")}
 									content={"Supplier"}
 								/>
 							</Item>
@@ -115,6 +116,9 @@ const CustomerLayout = memo(
 									type={ButtonType.PRIMARY}
 									content={"Sign Up"}
 									rounded={true}
+									onClick={() => {
+										setToggleSignUpForm(true);
+									}}
 								/>
 							</Item>
 						</Row>
@@ -172,7 +176,6 @@ const CustomerLayout = memo(
 					>
 						<Form
 							onSubmit={(event, object) => {
-								event.preventDefault();
 							}}
 							className={clsx({
 								[classes.login_form]: true,
@@ -224,14 +227,107 @@ const CustomerLayout = memo(
 									[classes.link]: true,
 								})}
 							/>
-							<Button
-								link={ButtonLink.external("/")}
-								content={"Create New"}
-								className={clsx({
-									[classes.link]: true,
-								})}
-							/>
 						</Column>
+					</div>
+				</Item>
+				<Item
+					visible={toggleSignUpForm}
+				>
+					<div
+						className={clsx({
+							[classes.login_screen]: true
+						})}
+					>
+						<Button
+							content={"x"}
+							className={clsx({
+								[classes.close_btn]: true,
+							})}
+							onClick={() => {
+								setToggleSignUpForm(false);
+							}}
+						/>
+
+						<div
+							className={clsx({
+								[classes.form_container]: true,
+							})}
+						>
+							<Form
+								onSubmit={(event, object) => {
+								}}
+								className={clsx({
+									[classes.login_form]: true,
+								})}
+								formTitle={(
+									<span
+										className={clsx({
+											[classes.login_form_title]: true,
+										})}
+									>
+										Sign Up
+									</span>
+								)}
+								submitButtonContent={"Sign Up"}
+							>
+								{FormInput.text({
+									id: "firstName",
+									label: InputLabel.asPlaceholder("First Name"),
+									error: new InputError({}),
+									className: clsx({
+										[classes.login_input]: true,
+									}),
+									validators: [
+										InputValidator.notEmpty("First Name is required!"),
+									],
+								})}
+								{FormInput.text({
+									id: "lastName",
+									label: InputLabel.asPlaceholder("Last Name"),
+									error: new InputError({}),
+									className: clsx({
+										[classes.login_input]: true,
+									}),
+									validators: [
+										InputValidator.notEmpty("Last Name is required!"),
+									],
+								})}
+								{FormInput.text({
+									id: "address",
+									label: InputLabel.asPlaceholder("Address"),
+									error: new InputError({}),
+									className: clsx({
+										[classes.login_input]: true,
+									}),
+									validators: [
+										InputValidator.notEmpty("Address is required!"),
+									],
+								})}
+								{FormInput.text({
+									id: "email",
+									label: InputLabel.asPlaceholder("Email"),
+									error: new InputError({showWhileTyping: true}),
+									className: clsx({
+										[classes.login_input]: true,
+									}),
+									validators: [
+										InputValidator.notEmpty("Email is required!"),
+										InputValidator.emailFormat("Email format invalid."),
+									],
+								})}
+								{FormInput.text({
+									id: "password",
+									label: InputLabel.asPlaceholder("Password"),
+									error: new InputError({}),
+									className: clsx({
+										[classes.login_input]: true,
+									}),
+									validators: [
+										InputValidator.notEmpty("Password is required!"),
+									],
+								})}
+							</Form>
+						</div>
 					</div>
 				</Item>
 			</div>

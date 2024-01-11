@@ -14,14 +14,18 @@ export default function Home() {
 	const [foodList, setFoodList] = useState([]);
 	const [publicValue, setPublicValue] = useState({});
 
+	console.log(publicValue)
+
 	useEffect(() => {
-		instance.get("Food",)
+		instance.get("Food",{
+			params: publicValue
+		})
 		.then((res) => {
 			setFoodList(res.data.Payload);
 		}).catch((e) => {
 			console.log(e);
 		});
-	}, []);
+	}, [publicValue]);
 
 	return (
 		<CustomerLayout

@@ -6,8 +6,20 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 60px;
+    height: fit-content;
     padding: 5px;
+
+    &.form_container {
+      display: inline-flex;
+      flex-direction: column;
+
+      .reset_btn {
+        padding: 10px;
+        width: 100px;
+        border-radius: 50px;
+        margin-top: 20px;
+      }
+    }
 
     .form_search {
       display: inline-flex;
@@ -38,13 +50,6 @@
         width: 100% !important;
         height: 35px !important;
       }
-      //.event_list_container {
-      //  display: inline-flex;
-      //  flex-direction: row;
-      //  align-items: center;
-      //  width: 80%;
-      //
-      //}
     }
   }
 }

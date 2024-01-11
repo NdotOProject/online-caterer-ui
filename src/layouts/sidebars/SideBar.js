@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import Card from "../../components/Card";
 import Form, {FormInput, InputLabel} from "../../components/Form";
-import {ButtonType} from "../../components/Button";
+import Button, {ButtonType} from "../../components/Button";
 import {Column, Item} from "../../components/ListView";
 import {DropdownItem} from "../../components/Form/FormInput";
 import {instance} from "../../services/HttpClient";
@@ -48,6 +48,7 @@ function SideBar(
 					key={"SearchForm"}
 					className={clsx({
 						[classes.side_bar_item]: true,
+						[classes.form_container]: true,
 					})}
 				>
 					<Form
@@ -61,15 +62,16 @@ function SideBar(
 						submitButtonContent={"Find"}
 						onSubmit={(event, object) => {
 							setPublicValue({
-								...publicValue,
-								search: object,
+								...object
 							});
 						}}
 					>
 						{FormInput.text({
-							id: "search",
+							id: "name",
 							htmlId: "searchInput",
-							label: InputLabel.asPlaceholder("Search", ""),
+							label: InputLabel.asPlaceholder(
+								"Search food's name"
+							),
 							placeholder: "Search",
 							className: clsx({
 								[classes.search_input]: true,
@@ -110,6 +112,17 @@ function SideBar(
 							}),
 						})}
 					</Form>
+					<Button
+						type={ButtonType.OUTLINE}
+						className={clsx({
+							[classes.reset_btn]: true,
+						})}
+						onClick={() => {
+							setPublicValue({});
+						}}
+					>
+						Reset
+					</Button>
 				</Item>
 				{includeItems}
 			</Column>
